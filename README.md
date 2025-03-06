@@ -14,3 +14,7 @@ Tested on ESP8266 as this exemple and on ESP32 S3 for production
 # Installation
 Copy the files and folder in /esphome/ 
 
+# wiring
+
+![conect](https://github.com/user-attachments/assets/1a1b3383-a6d0-4b2c-b4be-3c67ed7f28f5)
+
