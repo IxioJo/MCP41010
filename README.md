@@ -1,4 +1,4 @@
-# MCP41010
+# MCP41010 - ESPHome
 Controling a MCP41010 Digipot with ESPHome
 
 sources :
