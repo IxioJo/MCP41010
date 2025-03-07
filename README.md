@@ -13,10 +13,14 @@ Tested on ESP8266 as this exemple and on ESP32 S3 for production
 
 # Installation
 Copy the files and folder in /esphome/ or add the github link in your yaml file :
+
 external_components:
-  - source: 
+
+  - source:
+
       type: git
       url: http://github.com/IxioJo/MCP41010
+    
 
 
 # Wiring
