@@ -35,9 +35,10 @@ spi:
 
 # declaration of external component
 external_components:
-  - source:
-      type: local
-      path: external_components
+  - source: 
+      type: git
+      url: http://github.com/IxioJo/MCP41010
+
 
 
 
