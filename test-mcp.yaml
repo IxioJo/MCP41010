@@ -12,12 +12,12 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: !secret api
+    key: !secret test_mcp_api
 
 
 ota:
   - platform: esphome
-    password: !secret ota
+    password: !secret test_mcp_ota
 
 wifi:
   ssid: !secret wifi_ssid
@@ -25,18 +25,20 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-
+    ssid: "Test-Mcp Fallback Hotspot"
+    password: !secret test_mcp_ap
 
 
 spi:
   clk_pin: GPIO14
   mosi_pin: GPIO13
 
-
+# declaration of external component
 external_components:
   - source:
       type: local
       path: external_components
+
 
 
 
@@ -45,7 +47,25 @@ mcp41010:
   id: my_pot
   cs_pin: GPIO15
 
+# using a number to interact easily with HA
 
+number:
+  - platform: template
+    name: "Digipot level"
+    id: digipot_level
+    optimistic: true
+    min_value: 0
+    max_value: 255
+    initial_value: 0
+    step: 1
+    mode: slider
+    on_value:
+      then:
+        - lambda: |-
+            id(my_pot).set_value(id(digipot_level).state);
+
+
+# Test: button to define a value
 button:
   - platform: template
     name: "Set Pot to 128"
@@ -55,10 +75,45 @@ button:
             id(my_pot).set_value(128);
 
 
-
   - platform: template
     name: "Set Pot to 0"
     on_press:
       then:
         - lambda: |-
             id(my_pot).set_value(0);
+
+
+  - platform: template
+    name: "Digipot PLUS"
+    id: digipot_plus
+    on_press:
+      - logger.log: Button PLUS Pressed
+      - number.increment: digipot_level
+
+  - platform: template
+    name: "Digipot MINUS"
+    id: digipot_minus
+    on_press:
+      - logger.log: Button MINUS Pressed
+       
+      - number.decrement: digipot_level
+
+  - platform: template
+    name: "Digipot SETLOW"
+    id: digipot_setlow
+    on_press:
+      - logger.log: Button LOW Pressed
+      
+      - number.set :
+          id : digipot_level
+          value : 0
+
+  - platform: template
+    name: "Digipot SETHIGH"
+    id: digipot_sethigh
+    on_press:
+      - logger.log: Button HIGH Pressed
+      
+      - number.set :
+          id : digipot_level
+          value : 255
