@@ -39,6 +39,13 @@ external_components:
       type: git
       url: http://github.com/IxioJo/MCP41010
 
+# choose either the github link or copy the folder "components" and its files
+# external_components:
+#   - source: 
+#       type: local
+#       path: components
+
+
 
 
 
