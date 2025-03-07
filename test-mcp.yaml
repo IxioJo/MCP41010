@@ -37,7 +37,7 @@ spi:
 external_components:
   - source: 
       type: git
-      url: http://github.com/IxioJo/MCP41010
+      url: http://github.com/IxioJo/MCP41010-ESPHome
 
 # choose either the github link or copy the folder "components" and its files
 # external_components:
